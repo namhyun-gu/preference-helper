@@ -25,13 +25,14 @@ class PreferenceBloc extends Bloc<PreferenceEvent, PreferenceState> {
     PreferenceEvent event,
   ) async* {
     if (event is FetchPreference) {
-      var preferences = usagePreferences
+      var preferencesMap = Map<String, Preference>();
+      usagePreferences
           .map((preference) => _getPreference(preference))
-          .toList();
+          .forEach((preference) => preferencesMap[preference.key] = preference);
       var updatedTime = DateTime.now().millisecondsSinceEpoch;
       yield PreferenceLoaded(
         updatedTime: updatedTime,
-        preferences: preferences,
+        preferences: preferencesMap,
       );
     }
   }

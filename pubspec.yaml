@@ -1,7 +1,7 @@
 name: preference_helper
 description: A new Flutter package project.
 version: 0.0.1
-author: Namhyun, Gu
+author: Namhyun, Gu <mnhan0403@gmail.com>
 homepage: https://github.com/namhyun-gu/preference-helper
 
 environment:
@@ -13,6 +13,7 @@ dependencies:
   shared_preferences: ^0.5.1+1
   bloc: ^0.9.5
   equatable: ^0.2.3
+  meta: ^1.1.6
 
 dev_dependencies:
   flutter_test:

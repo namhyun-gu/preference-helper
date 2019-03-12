@@ -1,6 +1,8 @@
 # preference_helper
 
-This package is built [bloc](https://pub.dartlang.org/packages/bloc), [shared_preferences](https://pub.dartlang.org/packages/shared_preferences)
+![Pub](https://img.shields.io/pub/v/preference_helper.svg)
+
+This package is built with [bloc](https://pub.dartlang.org/packages/bloc), [shared_preferences](https://pub.dartlang.org/packages/shared_preferences)
 
 ## Usage
 

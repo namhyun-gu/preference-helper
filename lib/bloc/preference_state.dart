@@ -10,7 +10,7 @@ class PreferenceLoading extends PreferenceState {}
 
 class PreferenceLoaded extends PreferenceState {
   final int updatedTime;
-  final List<Preference> preferences;
+  final Map<String, Preference> preferences;
 
   PreferenceLoaded({
     @required this.updatedTime,
@@ -19,12 +19,8 @@ class PreferenceLoaded extends PreferenceState {
         assert(preferences != null),
         super([updatedTime, preferences]);
 
-  Preference getPreference(String key) {
-    return preferences.firstWhere((pref) => pref.key == key);
-  }
-
   @override
   String toString() {
-    return 'PreferenceLoaded{preferencesTimestamp: $updatedTime, preferences: $preferences}';
+    return 'PreferenceLoaded{updatedTime: $updatedTime, preferences: $preferences}';
   }
 }
