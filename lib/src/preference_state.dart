@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:preference_helper/model/preference.dart';
+import 'package:preference_helper/src/preference.dart';
 
 abstract class PreferenceState extends Equatable {
   PreferenceState([List props = const []]) : super(props);

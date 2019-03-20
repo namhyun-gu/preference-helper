@@ -1,4 +1,7 @@
 library preference_helper;
 
-export 'bloc/bloc.dart';
-export 'model/model.dart';
+export 'src/preference.dart';
+export 'src/preference_bloc.dart';
+export 'src/preference_event.dart';
+export 'src/preference_state.dart';
+export 'src/type_exception.dart';

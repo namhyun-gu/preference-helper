@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:preference_helper/bloc/preference_event.dart';
-import 'package:preference_helper/bloc/preference_state.dart';
-import 'package:preference_helper/model/exception.dart';
-import 'package:preference_helper/model/preference.dart';
+import 'package:preference_helper/src/preference.dart';
+import 'package:preference_helper/src/preference_event.dart';
+import 'package:preference_helper/src/preference_state.dart';
+import 'package:preference_helper/src/type_exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferenceBloc extends Bloc<PreferenceEvent, PreferenceState> {
