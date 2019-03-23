@@ -8,6 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferenceBloc extends Bloc<PreferenceEvent, PreferenceState> {
   final SharedPreferences sharedPreferences;
+
+  /// The list of [Preference] usage in bloc
   final List<Preference> usagePreferences;
 
   PreferenceBloc({
@@ -27,7 +29,7 @@ class PreferenceBloc extends Bloc<PreferenceEvent, PreferenceState> {
     if (event is FetchPreference) {
       var preferencesMap = Map<String, Preference>();
       usagePreferences
-          .map((preference) => _getPreference(preference))
+          .map((preference) => getPreference(preference))
           .forEach((preference) => preferencesMap[preference.key] = preference);
       var updatedTime = DateTime.now().millisecondsSinceEpoch;
       yield PreferenceLoaded(
@@ -37,7 +39,8 @@ class PreferenceBloc extends Bloc<PreferenceEvent, PreferenceState> {
     }
   }
 
-  Preference _getPreference(Preference preference) {
+  /// Returns filled value [Preference] by [Preference] from [SharedPreferences]
+  Preference getPreference(Preference preference) {
     var preferenceType = preference.typeOfPreference();
     if (preferenceType == int) {
       preference.value = sharedPreferences.getInt(preference.key);
@@ -58,6 +61,7 @@ class PreferenceBloc extends Bloc<PreferenceEvent, PreferenceState> {
     return preference;
   }
 
+  /// Set [Preference] to [SharedPreferences] and notify bloc
   Future setPreference(Preference preference) async {
     var preferenceType = preference.typeOfPreference();
     if (preferenceType == int) {

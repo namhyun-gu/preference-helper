@@ -6,7 +6,10 @@ abstract class PreferenceState extends Equatable {
   PreferenceState([List props = const []]) : super(props);
 }
 
-class PreferenceLoading extends PreferenceState {}
+class PreferenceLoading extends PreferenceState {
+  @override
+  String toString() => 'PreferenceLoading';
+}
 
 class PreferenceLoaded extends PreferenceState {
   final int updatedTime;
@@ -20,7 +23,6 @@ class PreferenceLoaded extends PreferenceState {
         super([updatedTime, preferences]);
 
   @override
-  String toString() {
-    return 'PreferenceLoaded{updatedTime: $updatedTime, preferences: $preferences}';
-  }
+  String toString() =>
+      'PreferenceLoaded{updatedTime: $updatedTime, preferences: $preferences}';
 }

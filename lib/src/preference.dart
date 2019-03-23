@@ -1,9 +1,15 @@
 import 'package:meta/meta.dart';
 
+/// A model of to use [SharedPreferences] in [PreferenceBloc]
 class Preference<T> {
-  String key;
+  /// The key use in [SharedPreferences]
+  final String key;
+
+  /// The value of saved value in [SharedPreferences]
   T value;
-  T initValue;
+
+  /// The init value of if not saved value in [SharedPreferences]
+  final T initValue;
 
   Preference({
     @required this.key,
