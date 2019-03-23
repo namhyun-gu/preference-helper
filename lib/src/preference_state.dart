@@ -2,20 +2,11 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:preference_helper/src/preference.dart';
 
-abstract class PreferenceState extends Equatable {
-  PreferenceState([List props = const []]) : super(props);
-}
-
-class PreferenceLoading extends PreferenceState {
-  @override
-  String toString() => 'PreferenceLoading';
-}
-
-class PreferenceLoaded extends PreferenceState {
+class PreferenceState extends Equatable {
   final int updatedTime;
   final Map<String, Preference> preferences;
 
-  PreferenceLoaded({
+  PreferenceState({
     @required this.updatedTime,
     @required this.preferences,
   })  : assert(updatedTime != null),
@@ -24,5 +15,5 @@ class PreferenceLoaded extends PreferenceState {
 
   @override
   String toString() =>
-      'PreferenceLoaded{updatedTime: $updatedTime, preferences: $preferences}';
+      'PreferenceState{updatedTime: $updatedTime, preferences: $preferences}';
 }

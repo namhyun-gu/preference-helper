@@ -19,24 +19,28 @@ class PreferenceBloc extends Bloc<PreferenceEvent, PreferenceState> {
         assert(usagePreferences != null);
 
   @override
-  PreferenceState get initialState => PreferenceLoading();
+  PreferenceState get initialState => _loadPreferences();
 
   @override
   Stream<PreferenceState> mapEventToState(
     PreferenceState currentState,
     PreferenceEvent event,
   ) async* {
-    if (event is FetchPreference) {
-      var preferencesMap = Map<String, Preference>();
-      usagePreferences
-          .map((preference) => getPreference(preference))
-          .forEach((preference) => preferencesMap[preference.key] = preference);
-      var updatedTime = DateTime.now().millisecondsSinceEpoch;
-      yield PreferenceLoaded(
-        updatedTime: updatedTime,
-        preferences: preferencesMap,
-      );
+    if (event is UpdatePreference) {
+      yield _loadPreferences();
     }
+  }
+
+  PreferenceState _loadPreferences() {
+    var preferencesMap = Map<String, Preference>();
+    usagePreferences
+        .map((preference) => getPreference(preference))
+        .forEach((preference) => preferencesMap[preference.key] = preference);
+    var updatedTime = DateTime.now().millisecondsSinceEpoch;
+    return PreferenceState(
+      updatedTime: updatedTime,
+      preferences: preferencesMap,
+    );
   }
 
   /// Returns filled value [Preference] by [Preference] from [SharedPreferences]
@@ -61,6 +65,10 @@ class PreferenceBloc extends Bloc<PreferenceEvent, PreferenceState> {
     return preference;
   }
 
+  Preference<T> getTypePreference<T>({String key, T initValue}) {
+    return getPreference(Preference<T>(key: key, initValue: initValue));
+  }
+
   /// Set [Preference] to [SharedPreferences] and notify bloc
   Future setPreference(Preference preference) async {
     var preferenceType = preference.typeOfPreference();
@@ -77,6 +85,6 @@ class PreferenceBloc extends Bloc<PreferenceEvent, PreferenceState> {
     } else {
       throw TypeException();
     }
-    dispatch(FetchPreference());
+    dispatch(UpdatePreference());
   }
 }

@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     var state = _preferenceBloc.currentState;
-    if (state is PreferenceLoaded) {
+    if (state is PreferenceState) {
       var counterPref = state.preferences['counter'];
       counterPref.value += 1;
       _preferenceBloc.setPreference(counterPref);
@@ -62,7 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     _preferenceBloc = BlocProvider.of<PreferenceBloc>(context);
-    _preferenceBloc.dispatch(FetchPreference());
     super.initState();
   }
 
@@ -83,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   'You have pushed the button this many times:',
                 ),
                 Text(
-                  (state is PreferenceLoaded
+                  (state is PreferenceState
                           ? state.preferences['counter'].value
                           : 0)
                       .toString(),
