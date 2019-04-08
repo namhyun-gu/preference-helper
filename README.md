@@ -61,6 +61,14 @@ class MyApp extends StatelessWidget {
 }
 ```
 
+- Set preference
+
+```dart
+var counterPref = state.preferences.get<int>("counter")
+counterPref.value += 1;
+preferenceBloc.dispatch(UpdatePreference(counterPref));
+```
+
 - Use preferences in widget with BlocBuilder
 
 ```dart
@@ -69,8 +77,8 @@ Widget build(BuildContext context) {
   return BlocBuilder<PreferenceEvent, PreferenceState>(
     bloc: BlocProvider.of<PreferenceBloc>(context),
     builder: (BuildContext context, PreferenceState state) {
-      var counter = state.preferences['counter'].value;
-      return Text(count.toString());
+      var counter = state.preferences.get<int>('counter').value;
+      return Text(counter.toString());
     };
   );
 }
@@ -79,24 +87,15 @@ Widget build(BuildContext context) {
 - Use preferences in widget without BlocBuilder
 
 ```dart
-var prefCounter = preferenceBloc.getPreference(Preference<int>(
-  key: "counter",
-  initValue: 0,
-));
-
-print(prefCounter.value);
-
-// or
-
-var prefTypedCounter = preferenceBloc.getTypePreference<int>(
+var prefCounter = preferenceBloc.getPreference<int>(
   key: "counter",
   initValue: 0,
 );
 
-print(prefTypedCounter.value);
+print(prefCounter.value);
 ```
 
-> You can see this code blocks in example project. check this [link](https://github.com/namhyun-gu/preference-helper/tree/master/example)
+> You can see this code blocks in example project. check this [link](https://github.com/namhyun-gu/preference-helper/blob/master/example/lib/main.dart)
 
 ## License
 

@@ -53,9 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
     var state = _preferenceBloc.currentState;
     if (state is PreferenceState) {
-      var counterPref = state.preferences['counter'];
+      var counterPref = state.preferences.get<int>('counter');
       counterPref.value += 1;
-      _preferenceBloc.setPreference(counterPref);
+      _preferenceBloc.dispatch(UpdatePreference(counterPref));
     }
   }
 
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Text(
                   (state is PreferenceState
-                          ? state.preferences['counter'].value
+                          ? state.preferences.get<int>('counter').value
                           : 0)
                       .toString(),
                   style: Theme.of(context).textTheme.display1,

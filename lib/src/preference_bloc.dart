@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:preference_helper/src/preference.dart';
 import 'package:preference_helper/src/preference_event.dart';
 import 'package:preference_helper/src/preference_state.dart';
+import 'package:preference_helper/src/preferences.dart';
 import 'package:preference_helper/src/type_exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,12 +11,13 @@ class PreferenceBloc extends Bloc<PreferenceEvent, PreferenceState> {
   final SharedPreferences sharedPreferences;
 
   /// The list of [Preference] usage in bloc
-  final List<Preference> usagePreferences;
+  final List<Preference> _usagePreferences;
 
   PreferenceBloc({
     @required this.sharedPreferences,
-    @required this.usagePreferences,
-  })  : assert(sharedPreferences != null),
+    @required List<Preference> usagePreferences,
+  })  : _usagePreferences = usagePreferences,
+        assert(sharedPreferences != null),
         assert(usagePreferences != null);
 
   @override
@@ -27,24 +29,26 @@ class PreferenceBloc extends Bloc<PreferenceEvent, PreferenceState> {
     PreferenceEvent event,
   ) async* {
     if (event is UpdatePreference) {
+      var updatedPreference = event.updatedPreference;
+      await _setPreference(updatedPreference);
       yield _loadPreferences();
     }
   }
 
   PreferenceState _loadPreferences() {
     var preferencesMap = Map<String, Preference>();
-    usagePreferences
-        .map((preference) => getPreference(preference))
+    _usagePreferences
+        .map((preference) => _getPreference(preference))
         .forEach((preference) => preferencesMap[preference.key] = preference);
     var updatedTime = DateTime.now().millisecondsSinceEpoch;
     return PreferenceState(
       updatedTime: updatedTime,
-      preferences: preferencesMap,
+      preferences: Preferences(preferencesMap),
     );
   }
 
   /// Returns filled value [Preference] by [Preference] from [SharedPreferences]
-  Preference getPreference(Preference preference) {
+  Preference _getPreference(Preference preference) {
     var preferenceType = preference.typeOfPreference();
     if (preferenceType == int) {
       preference.value = sharedPreferences.getInt(preference.key);
@@ -65,12 +69,7 @@ class PreferenceBloc extends Bloc<PreferenceEvent, PreferenceState> {
     return preference;
   }
 
-  Preference<T> getTypePreference<T>({String key, T initValue}) {
-    return getPreference(Preference<T>(key: key, initValue: initValue));
-  }
-
-  /// Set [Preference] to [SharedPreferences] and notify bloc
-  Future setPreference(Preference preference) async {
+  Future _setPreference(Preference preference) async {
     var preferenceType = preference.typeOfPreference();
     if (preferenceType == int) {
       await sharedPreferences.setInt(preference.key, preference.value);
@@ -85,6 +84,10 @@ class PreferenceBloc extends Bloc<PreferenceEvent, PreferenceState> {
     } else {
       throw TypeException();
     }
-    dispatch(UpdatePreference());
+  }
+
+  /// Returns [Preference] by key from [SharedPreferences]
+  Preference<T> getPreference<T>({String key, T initValue}) {
+    return _getPreference(Preference<T>(key: key, initValue: initValue));
   }
 }

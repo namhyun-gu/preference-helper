@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:preference_helper/src/preference.dart';
+import 'package:preference_helper/src/preferences.dart';
 
 class PreferenceState extends Equatable {
   final int updatedTime;
-  final Map<String, Preference> preferences;
+  final Preferences preferences;
 
   PreferenceState({
     @required this.updatedTime,

@@ -22,5 +22,6 @@ class Preference<T> {
     return 'Preference{key: $key, value: $value, initValue: $initValue}';
   }
 
+  /// Returns [Preference] generic type used in bloc
   Type typeOfPreference() => T;
 }

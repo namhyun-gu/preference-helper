@@ -1,3 +1,10 @@
+## 0.0.5
+
+- Add wrapper class Preferences for preference lists use PreferenceState
+- Change preferences field type List<Preference> to Preferences class
+- Rename getTypePreference<T> to getPreference<T>
+- Change setPreference method to private, use dispatch event UpdatePreference instead of setPreference
+
 ## 0.0.4+1
 
 - Update documentation
