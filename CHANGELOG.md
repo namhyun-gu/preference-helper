@@ -1,3 +1,7 @@
+## 0.0.4+1
+
+- Update documentation
+
 ## 0.0.4
 
 - Change bloc init state to loaded preference state
