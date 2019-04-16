@@ -19,7 +19,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_bloc: ^0.7.1
   preference_helper:
     path: ../
 
