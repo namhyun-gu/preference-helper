@@ -1,6 +1,6 @@
 # preference_helper
 
-![Pub](https://img.shields.io/pub/v/preference_helper.svg)
+[![Pub](https://img.shields.io/pub/v/preference_helper.svg)](https://pub.dartlang.org/packages/preference_helper)
 
 > A package that makes shared_preferences easier to use, This package is built with [bloc](https://pub.dartlang.org/packages/bloc), [shared_preferences](https://pub.dartlang.org/packages/shared_preferences)
 
@@ -87,11 +87,7 @@ Widget build(BuildContext context) {
 - Use preferences in widget without BlocBuilder
 
 ```dart
-var prefCounter = preferenceBloc.getPreference<int>(
-  key: "counter",
-  initValue: 0,
-);
-
+var prefCounter = preferenceBloc.getPreference<int>("counter");
 print(prefCounter.value);
 ```
 

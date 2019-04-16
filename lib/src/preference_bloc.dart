@@ -86,8 +86,8 @@ class PreferenceBloc extends Bloc<PreferenceEvent, PreferenceState> {
     }
   }
 
-  /// Returns [Preference] by key from [SharedPreferences]
-  Preference<T> getPreference<T>({String key, T initValue}) {
-    return _getPreference(Preference<T>(key: key, initValue: initValue));
+  /// Returns [Preference] by key from [Preferences] in [PreferenceState]
+  Preference<T> getPreference<T>(String key) {
+    return currentState.preferences.get<T>(key);
   }
 }

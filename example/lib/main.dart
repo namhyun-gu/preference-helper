@@ -51,12 +51,9 @@ class _MyHomePageState extends State<MyHomePage> {
   PreferenceBloc _preferenceBloc;
 
   void _incrementCounter() {
-    var state = _preferenceBloc.currentState;
-    if (state is PreferenceState) {
-      var counterPref = state.preferences.get<int>('counter');
-      counterPref.value += 1;
-      _preferenceBloc.dispatch(UpdatePreference(counterPref));
-    }
+    var counterPref = _preferenceBloc.getPreference<int>('counter');
+    counterPref.value += 1;
+    _preferenceBloc.dispatch(UpdatePreference(counterPref));
   }
 
   @override

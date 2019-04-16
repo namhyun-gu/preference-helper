@@ -1,3 +1,7 @@
+## 0.0.5+1
+
+- Change getPreference<T> parameter and get from state
+
 ## 0.0.5
 
 - Add wrapper class Preferences for preference lists use PreferenceState
