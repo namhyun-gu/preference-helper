@@ -1,6 +1,6 @@
 name: preference_helper
 description: A package that makes shared_preferences easier to use, This package is built with bloc, shared_preferences
-version: 0.0.5+1
+version: 0.0.5+2
 author: Namhyun, Gu <mnhan0403@gmail.com>
 homepage: https://github.com/namhyun-gu/preference-helper
 
@@ -11,8 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
   shared_preferences: ^0.5.1+1
-  bloc: ^0.9.5
-  flutter_bloc: ^0.7.1
+  bloc: ^0.13.0
+  flutter_bloc: ^0.13.0
   equatable: ^0.2.3
   meta: ^1.1.6
 

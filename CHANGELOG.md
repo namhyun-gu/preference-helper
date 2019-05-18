@@ -1,3 +1,7 @@
+## 0.0.5+2
+
+- Update dependencies (bloc, flutter_bloc to 0.13.0)
+
 ## 0.0.5+1
 
 - Change getPreference<T> parameter and get from state
